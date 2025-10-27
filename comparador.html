@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comparador de Vehículos - Downforce y Suspensión</title>
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+  </head>
+
+  <body class="bg-zinc-900 text-white min-h-screen p-4 md:p-8">
+    <main class="max-w-7xl mx-auto">
+      <!-- Header -->
+      <div class="bg-red-900 border-4 border-black neobrutalist-shadow-lg p-6 mb-8">
+        <h1 class="text-4xl md:text-5xl font-black text-white uppercase tracking-tight">
+          Comparador de Vehículos
+        </h1>
+        <p class="text-white text-lg mt-2 font-bold">Downforce • Velocidad • Suspensión</p>
+        <div class="mt-4 flex gap-4">
+          <a href="index.html" class="text-white font-bold uppercase underline">Individual</a>
+          <a href="comparador.html" class="text-white font-bold uppercase underline">Comparador</a>
+        </div>
+      </div>
+
+      <!-- Speed Control (Global) -->
+      <div class="bg-red-900 border-4 border-black neobrutalist-shadow p-6 mb-8">
+        <h2 class="text-2xl font-black text-white uppercase mb-4">
+          Velocidad de Prueba
+        </h2>
+        <div class="flex items-center gap-4">
+          <input
+            type="range"
+            id="velocidadGlobal"
+            min="20"
+            max="350"
+            step="10"
+            value="300"
+            class="flex-1 h-3 bg-black neobrutalist-shadow-sm"
+          />
+          <p class="text-white font-black text-3xl uppercase min-w-[140px]">
+            <span id="velocidadLabel">300</span> km/h
+          </p>
+        </div>
+      </div>
+
+      <!-- Vehicle Selection Grid -->
+      <div id="vehicles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <!-- Vehicle cards will be added here -->
+      </div>
+
+      <!-- Add Vehicle Button -->
+      <div class="mb-8">
+        <button
+          id="add-vehicle-btn"
+          class="w-full bg-green-600 hover:bg-green-700 text-white font-black text-xl uppercase py-4 neobrutalist-shadow"
+        >
+          + Agregar Vehículo
+        </button>
+      </div>
+
+      <!-- Generate Button -->
+      <div class="mb-8">
+        <button
+          id="generate-button"
+          class="w-full bg-red-600 hover:bg-red-700 text-white font-black text-2xl uppercase py-6 neobrutalist-shadow-lg"
+        >
+          Generar Comparación
+        </button>
+      </div>
+
+      <!-- Charts Section -->
+      <div id="charts-section" class="space-y-8 hidden">
+        <!-- Velocity Chart -->
+        <div class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
+          <h2 class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2">
+            Comparación de Velocidad
+          </h2>
+          <canvas id="velocityChart"></canvas>
+        </div>
+
+        <!-- Downforce Chart -->
+        <div class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
+          <h2 class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2">
+            Comparación de Downforce
+          </h2>
+          <canvas id="downforceChart"></canvas>
+        </div>
+
+        <!-- Suspension Chart -->
+        <div class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
+          <h2 class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2">
+            Hundimiento de Suspensión
+          </h2>
+          <canvas id="suspensionChart"></canvas>
+        </div>
+
+        <!-- Summary Table -->
+        <div class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
+          <h2 class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2">
+            Resumen Comparativo
+          </h2>
+          <div class="overflow-x-auto">
+            <table id="summary-table" class="w-full text-black">
+              <thead>
+                <tr class="border-b-4 border-black">
+                  <th class="text-left p-3 font-black uppercase">Vehículo</th>
+                  <th class="text-right p-3 font-black uppercase">Masa</th>
+                  <th class="text-right p-3 font-black uppercase">Downforce Máx</th>
+                  <th class="text-right p-3 font-black uppercase">% del Peso</th>
+                  <th class="text-right p-3 font-black uppercase">Hundimiento</th>
+                </tr>
+              </thead>
+              <tbody id="summary-tbody">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="cars-data.js"></script>
+    <script src="physics.js"></script>
+    <script src="app-comparador.js"></script>
+  </body>
+</html>
