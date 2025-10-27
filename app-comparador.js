@@ -7,7 +7,12 @@
 
   let selectedVehicles = [];
   let vehicleCounter = 0;
-  let charts = { velocity: null, downforce: null, suspension: null };
+  let charts = { 
+    velocityTime: null, 
+    downforceTime: null, 
+    downforceVelocity: null, 
+    suspension: null 
+  };
 
   const velocidadGlobal = document.getElementById("velocidadGlobal");
   const velocidadLabel = document.getElementById("velocidadLabel");
@@ -66,6 +71,7 @@
       <div class="bg-white border-4 border-black p-3 text-black font-bold">
         <p class="text-xs uppercase mb-1">Datos</p>
         <p class="text-sm"><span class="mass">${car.m}</span> kg • <span class="vmax">${car.v_max_kmh}</span> km/h</p>
+        <p class="text-xs mt-1"><span class="power">${car.potencia_kw}</span> kW</p>
       </div>
     `;
 
@@ -84,11 +90,11 @@
     const car = carsData[newKey];
     const card = document.getElementById(id);
 
-    // Actualizar imagen y datos
     card.querySelector("img").src = car.image;
     card.querySelector("img").alt = car.name;
     card.querySelector(".mass").textContent = car.m;
     card.querySelector(".vmax").textContent = car.v_max_kmh;
+    card.querySelector(".power").textContent = car.potencia_kw;
   }
 
   // === ELIMINAR VEHÍCULO ===
@@ -106,54 +112,89 @@
     }
 
     const vFinal = parseFloat(velocidadGlobal.value);
-    const velocityDatasets = [];
-    const downforceDatasets = [];
+    
+    // Datasets para gráficas basadas en tiempo
+    const velocityTimeDatasets = [];
+    const downforceTimeDatasets = [];
     const suspensionDatasets = [];
+    
+    // Datasets para downforce vs velocidad
+    const downforceVelocityDatasets = [];
+    
     const summaryData = [];
 
-    let labels_v2 = [];
+    let maxTime = 0;
+    let labelsTime = [];
 
     selectedVehicles.forEach((vehicle, index) => {
       const car = carsData[vehicle.carKey];
       const data = generateData(car, vFinal);
-
-      const labels = data.map((d) => Math.pow(d.v, 2)); // eje X = v²
+      
+      // Datos vs tiempo
+      const labels_t = data.map((d) => d.t);
       const velData = data.map((d) => d.v);
       const downData = data.map((d) => d.downforce_kg);
       const suspData = data.map((d) => d.hundimiento_mm);
 
-      if (index === 0) labels_v2 = labels;
+      if (data.length > 0 && data[data.length - 1].t > maxTime) {
+        maxTime = data[data.length - 1].t;
+        labelsTime = labels_t;
+      }
 
-      velocityDatasets.push({
+      velocityTimeDatasets.push({
         label: car.name,
-        data: velData,
+        data: velData.map((v, i) => ({ x: labels_t[i], y: v })),
         borderColor: vehicle.color,
+        backgroundColor: vehicle.color + '20',
         borderWidth: 3,
-        tension: 0.2,
+        tension: 0.3,
+        pointRadius: 0,
       });
 
-      downforceDatasets.push({
+      downforceTimeDatasets.push({
         label: car.name,
-        data: downData,
+        data: downData.map((d, i) => ({ x: labels_t[i], y: d })),
         borderColor: vehicle.color,
+        backgroundColor: vehicle.color + '20',
         borderWidth: 3,
-        tension: 0.2,
+        tension: 0.3,
+        pointRadius: 0,
       });
 
       suspensionDatasets.push({
         label: car.name,
-        data: suspData,
+        data: suspData.map((s, i) => ({ x: labels_t[i], y: s })),
         borderColor: vehicle.color,
+        backgroundColor: vehicle.color + '20',
         borderWidth: 3,
-        tension: 0.2,
+        tension: 0.3,
+        pointRadius: 0,
       });
 
+      // Downforce vs velocidad (curva característica)
+      const downVsVel = generateDownforceVsVelocity(car, vFinal);
+      const dfVelData = downVsVel.map(d => ({ x: d.v, y: d.downforce_kg }));
+      
+      downforceVelocityDatasets.push({
+        label: car.name,
+        data: dfVelData,
+        borderColor: vehicle.color,
+        backgroundColor: vehicle.color + '20',
+        borderWidth: 3,
+        tension: 0.2,
+        pointRadius: 0,
+      });
+
+      // Resumen
       const dfMax = Math.max(...downData);
       const porcentaje = (dfMax * 9.81) / (car.m * 9.81) * 100;
+      const timeToMax = data.length > 0 ? data[data.length - 1].t : 0;
 
       summaryData.push({
         name: car.name,
         mass: car.m,
+        power: car.potencia_kw,
+        timeToMax: timeToMax,
         downforce: dfMax * 9.81,
         percentage: porcentaje,
         suspension: Math.max(...suspData),
@@ -163,7 +204,7 @@
 
     updateSummaryTable(summaryData);
     document.getElementById("charts-section").classList.remove("hidden");
-    createCharts(labels_v2, velocityDatasets, downforceDatasets, suspensionDatasets);
+    createCharts(velocityTimeDatasets, downforceTimeDatasets, downforceVelocityDatasets, suspensionDatasets);
   }
 
   // === TABLA RESUMEN ===
@@ -178,6 +219,8 @@
           ${d.name}
         </td>
         <td class="text-right p-3 font-bold">${d.mass} kg</td>
+        <td class="text-right p-3 font-bold">${d.power} kW</td>
+        <td class="text-right p-3 font-bold">${d.timeToMax.toFixed(1)} s</td>
         <td class="text-right p-3 font-bold">${d.downforce.toFixed(0)} N</td>
         <td class="text-right p-3 font-bold">${d.percentage.toFixed(1)}%</td>
         <td class="text-right p-3 font-bold">${d.suspension.toFixed(2)} mm</td>
@@ -188,7 +231,7 @@
   }
 
   // === CREAR GRÁFICOS ===
-  function createCharts(labels_v2, velocityDatasets, downforceDatasets, suspensionDatasets) {
+  function createCharts(velocityTimeDatasets, downforceTimeDatasets, downforceVelocityDatasets, suspensionDatasets) {
     const opts = {
       responsive: true,
       plugins: {
@@ -201,9 +244,9 @@
       },
       scales: {
         x: {
+          type: 'linear',
           title: {
             display: true,
-            text: "Velocidad² (km²/h²)",
             color: "#000",
             font: { size: 14, weight: "bold" },
           },
@@ -218,22 +261,34 @@
       },
     };
 
-    const createChart = (ctxId, datasets, yLabel) => {
+    const createChart = (ctxId, datasets, xLabel, yLabel) => {
       const ctx = document.getElementById(ctxId);
       if (charts[ctxId]) charts[ctxId].destroy();
+      
       charts[ctxId] = new Chart(ctx, {
         type: "line",
-        data: { labels: labels_v2, datasets },
+        data: { datasets },
         options: {
           ...opts,
-          scales: { ...opts.scales, y: { ...opts.scales.y, title: { display: true, text: yLabel } } },
+          scales: { 
+            ...opts.scales, 
+            x: { 
+              ...opts.scales.x, 
+              title: { ...opts.scales.x.title, text: xLabel } 
+            },
+            y: { 
+              ...opts.scales.y, 
+              title: { display: true, text: yLabel, color: "#000", font: { size: 14, weight: "bold" } } 
+            } 
+          },
         },
       });
     };
 
-    createChart("velocityChart", velocityDatasets, "Velocidad (km/h)");
-    createChart("downforceChart", downforceDatasets, "Downforce (kg)");
-    createChart("suspensionChart", suspensionDatasets, "Hundimiento (mm)");
+    createChart("velocityTimeChart", velocityTimeDatasets, "Tiempo (s)", "Velocidad (km/h)");
+    createChart("downforceTimeChart", downforceTimeDatasets, "Tiempo (s)", "Downforce (kg)");
+    createChart("downforceVelocityChart", downforceVelocityDatasets, "Velocidad (km/h)", "Downforce (kg)");
+    createChart("suspensionChart", suspensionDatasets, "Tiempo (s)", "Hundimiento (mm)");
   }
 
   // === AUTO INICIAL ===

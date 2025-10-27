@@ -10,7 +10,24 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Styles -->
-    <link rel="stylesheet" href="styles.css">
+    <style>
+      .neobrutalist-shadow {
+        box-shadow: 6px 6px 0px rgba(0, 0, 0, 1);
+      }
+      .neobrutalist-shadow-lg {
+        box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
+      }
+      .neobrutalist-shadow-sm {
+        box-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
+      }
+      .fade-in {
+        animation: fadeIn 0.3s ease-in;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
   </head>
 
   <body class="bg-zinc-900 text-white min-h-screen p-4 md:p-8">
@@ -37,7 +54,7 @@
             type="range"
             id="velocidadGlobal"
             min="20"
-            max="350"
+            max="420"
             step="10"
             value="300"
             class="flex-1 h-3 bg-black neobrutalist-shadow-sm"
@@ -75,26 +92,34 @@
 
       <!-- Charts Section -->
       <div id="charts-section" class="space-y-8 hidden">
-        <!-- Velocity Chart -->
+        <!-- Velocity vs Time Chart -->
         <div class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
           <h2 class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2">
-            Comparación de Velocidad
+            Comparación de Velocidad vs Tiempo
           </h2>
-          <canvas id="velocityChart"></canvas>
+          <canvas id="velocityTimeChart"></canvas>
         </div>
 
-        <!-- Downforce Chart -->
+        <!-- Downforce vs Time Chart -->
         <div class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
           <h2 class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2">
-            Comparación de Downforce
+            Comparación de Downforce vs Tiempo
           </h2>
-          <canvas id="downforceChart"></canvas>
+          <canvas id="downforceTimeChart"></canvas>
+        </div>
+
+        <!-- Downforce vs Velocity Chart -->
+        <div class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
+          <h2 class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2">
+            Downforce vs Velocidad (Curvas Características)
+          </h2>
+          <canvas id="downforceVelocityChart"></canvas>
         </div>
 
         <!-- Suspension Chart -->
         <div class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
           <h2 class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2">
-            Hundimiento de Suspensión
+            Hundimiento de Suspensión vs Tiempo
           </h2>
           <canvas id="suspensionChart"></canvas>
         </div>
@@ -110,6 +135,8 @@
                 <tr class="border-b-4 border-black">
                   <th class="text-left p-3 font-black uppercase">Vehículo</th>
                   <th class="text-right p-3 font-black uppercase">Masa</th>
+                  <th class="text-right p-3 font-black uppercase">Potencia</th>
+                  <th class="text-right p-3 font-black uppercase">Tiempo</th>
                   <th class="text-right p-3 font-black uppercase">Downforce Máx</th>
                   <th class="text-right p-3 font-black uppercase">% del Peso</th>
                   <th class="text-right p-3 font-black uppercase">Hundimiento</th>
