@@ -8,8 +8,9 @@ const carsData = {
     v_max_kmh: 354.9,
     potencia_kw: 750, // Potencia del motor
     aceleracion_0_100: 2.6, // segundos 0-100 km/h
-    image: "https://fr.f1authentics.com/cdn/shop/files/16x9-Hero-RB19.jpg?crop=center&height=1800&v=1754379773&width=3200",
-    color: "#1e41ff"
+    image:
+      "https://fr.f1authentics.com/cdn/shop/files/16x9-Hero-RB19.jpg?crop=center&height=1800&v=1754379773&width=3200",
+    color: "#1e41ff",
   },
   f1_mercedes_w08_2017: {
     name: "F1 Mercedes W08 (2017)",
@@ -20,8 +21,9 @@ const carsData = {
     v_max_kmh: 350,
     potencia_kw: 720,
     aceleracion_0_100: 2.7,
-    image: "https://images.squarespace-cdn.com/content/v1/52744b67e4b0782c048b666f/1487957771484-GQVXBG3HB4EU4T9451CK/M57710+copy.jpg",
-    color: "#00d2be"
+    image:
+      "https://images.squarespace-cdn.com/content/v1/52744b67e4b0782c048b666f/1487957771484-GQVXBG3HB4EU4T9451CK/M57710+copy.jpg",
+    color: "#00d2be",
   },
   f1_renault_r25_2005: {
     name: "F1 Renault R25 (2005)",
@@ -32,8 +34,9 @@ const carsData = {
     v_max_kmh: 330,
     potencia_kw: 670,
     aceleracion_0_100: 3.0,
-    image: "https://img.carswp.com/renault/formula-1/wallpapers_renault_formula-1_2005_1.jpg",
-    color: "#ffd700"
+    image:
+      "https://img.carswp.com/renault/formula-1/wallpapers_renault_formula-1_2005_1.jpg",
+    color: "#ffd700",
   },
   f1_mclaren_mp44_1988: {
     name: "F1 McLaren MP4/4 (1988)",
@@ -44,8 +47,9 @@ const carsData = {
     v_max_kmh: 330,
     potencia_kw: 520,
     aceleracion_0_100: 3.2,
-    image: "https://images.squarespace-cdn.com/content/v1/5dab12cd9280b45f3dc2e745/1585074068222-81P1AUVRL83DQH6D0B1A/Senna-F1-V1_reflection--web.jpg",
-    color: "#ff0000"
+    image:
+      "https://images.squarespace-cdn.com/content/v1/5dab12cd9280b45f3dc2e745/1585074068222-81P1AUVRL83DQH6D0B1A/Senna-F1-V1_reflection--web.jpg",
+    color: "#ff0000",
   },
   f1_williams_fw11_1986: {
     name: "F1 Williams FW11 (1986)",
@@ -56,8 +60,9 @@ const carsData = {
     v_max_kmh: 330,
     potencia_kw: 500,
     aceleracion_0_100: 3.3,
-    image: "https://media.autoexpress.co.uk/image/private/s--X-WVjvBW--/f_auto,t_content-image-full-desktop@1/v1702309434/evo/2023/12/Williams%20Honda%20FW11%20anatomy-3.png",
-    color: "#0055ff"
+    image:
+      "https://media.autoexpress.co.uk/image/private/s--X-WVjvBW--/f_auto,t_content-image-full-desktop@1/v1702309434/evo/2023/12/Williams%20Honda%20FW11%20anatomy-3.png",
+    color: "#0055ff",
   },
   f1_ferrari_312t_1975: {
     name: "F1 Ferrari 312T (1975, Niki Lauda)",
@@ -68,8 +73,9 @@ const carsData = {
     v_max_kmh: 310,
     potencia_kw: 380,
     aceleracion_0_100: 3.8,
-    image: "https://www.tomhartleyjnr.com/wp-content/uploads/2020/03/7F2A7839.jpg",
-    color: "#dc0000"
+    image:
+      "https://www.tomhartleyjnr.com/wp-content/uploads/2020/03/7F2A7839.jpg",
+    color: "#dc0000",
   },
   hypercar_ferrari_499p_2024: {
     name: "Hypercar Ferrari 499P (2024)",
@@ -80,11 +86,12 @@ const carsData = {
     v_max_kmh: 330,
     potencia_kw: 500,
     aceleracion_0_100: 3.5,
-    image: "",
-    color: "#8b0000"
+    image:
+      "https://pixelz.cc/wp-content/uploads/2023/09/ferrari-499p-le-mans-2023-uhd-4k-wallpaper.jpg",
+    color: "#8b0000",
   },
-  hypercar_ford_gt40_1966: {
-    name: "Hypercar Ford GT40 (1966)",
+  ford_gt40_LeMans: {
+    name: "Ford GT40 (LeMans)",
     m: 1100,
     A: 1.8,
     CL: 0.9,
@@ -92,8 +99,9 @@ const carsData = {
     v_max_kmh: 330,
     potencia_kw: 350,
     aceleracion_0_100: 5.2,
-    image: "https://cdn-4.motorsport.com/images/amp/6yDpE3p0/s1000/ford-gt40-le-mans.jpg",
-    color: "#003478"
+    image:
+      "https://www.carscoops.com/wp-content/uploads/2019/08/750edbf9-ford_gt40_lemans_copy_00.jpg",
+    color: "#003478",
   },
   hypercar_porsche_917k_1970: {
     name: "Hypercar Porsche 917K (1970)",
@@ -104,11 +112,11 @@ const carsData = {
     v_max_kmh: 360,
     potencia_kw: 450,
     aceleracion_0_100: 3.8,
-    image: "https://cdn-3.motorsport.com/images/amp/6YJ0A7b0/s1000/porsche-917k.jpg",
-    color: "#d4af37"
+    image: "https://farm3.staticflickr.com/2514/3889836313_203b1f6da5_o.jpg",
+    color: "#d4af37",
   },
   gt3_porsche_911: {
-    name: "GT3 Porsche 911 RSR",
+    name: "Porsche 911 RSR",
     m: 1250,
     A: 1.9,
     CL: 1.8,
@@ -116,20 +124,22 @@ const carsData = {
     v_max_kmh: 295,
     potencia_kw: 380,
     aceleracion_0_100: 4.5,
-    image: "https://cdn-1.motorsport.com/images/amp/0aYwD7xY/s1000/porsche-911-gt3-r-2023.jpg",
-    color: "#228b22"
+    image:
+      "https://s100.iracing.com/wp-content/uploads/2018/06/iRacing-Motorsport-Simulator-Screenshot-2018.05.31-11.32.44.56.png",
+    color: "#228b22",
   },
   gt3_amg: {
-    name: "GT3 Mercedes AMG GT3",
+    name: "Mercedes-AMG GT3",
     m: 1280,
     A: 1.92,
     CL: 1.6,
-    CD: 0.70,
+    CD: 0.7,
     v_max_kmh: 290,
     potencia_kw: 370,
     aceleracion_0_100: 4.8,
-    image: "https://cdn-3.motorsport.com/images/amp/0yK5QWo2/s1000/mercedes-amg-gt3.jpg",
-    color: "#4a4a4a"
+    image:
+      "https://hips.hearstapps.com/hmg-prod/amv-prod-cad-assets/images/16q1/665019/mercedes-amg-gt3-race-car-first-drive-review-car-and-driver-photo-666972-s-original.jpg?fill=1:1&resize=1200:*",
+    color: "#4a4a4a",
   },
   bugatti_chiron: {
     name: "Bugatti Chiron",
@@ -140,8 +150,9 @@ const carsData = {
     v_max_kmh: 420,
     potencia_kw: 1103,
     aceleracion_0_100: 2.4,
-    image: "https://cdn.motor1.com/images/mgl/Qp1yE/s1/bugatti-chiron.jpg",
-    color: "#0022ff"
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRy75cK5_4MKS77uT4jJTiiJxwfDUynlr1Ig&s",
+    color: "#0022ff",
   },
   ferrari_458: {
     name: "Ferrari 458 Italia",
@@ -152,8 +163,9 @@ const carsData = {
     v_max_kmh: 325,
     potencia_kw: 419,
     aceleracion_0_100: 3.4,
-    image: "https://cdn.motor1.com/images/mgl/g3W2q/s1/ferrari-458-italia.jpg",
-    color: "#ff1b1b"
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/d/df/2011_Ferrari_458_Italia_3.jpg",
+    color: "#ff1b1b",
   },
   mazda3: {
     name: "Mazda 3 Hatchback",
@@ -164,8 +176,9 @@ const carsData = {
     v_max_kmh: 220,
     potencia_kw: 186,
     aceleracion_0_100: 7.3,
-    image: "https://cdn.motor1.com/images/mgl/WZPbp/s1/2021-mazda3-turbo.jpg",
-    color: "#a00000"
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/2019_Mazda3_SE-L_2.0_Front.jpg/1200px-2019_Mazda3_SE-L_2.0_Front.jpg",
+    color: "#a00000",
   },
   cybertruck: {
     name: "Tesla Cybertruck",
@@ -176,20 +189,22 @@ const carsData = {
     v_max_kmh: 210,
     potencia_kw: 630,
     aceleracion_0_100: 2.9,
-    image: "https://cdn.motor1.com/images/mgl/nxvjj/s1/tesla-cybertruck.jpg",
-    color: "#a9a9a9"
+    image:
+      "https://preview.redd.it/top-gear-predicted-the-cybertruck-v0-yu3t0n7ee1cc1.jpeg?auto=webp&s=95cde0d9a91cb539cf487ebfbd8a3d2fca9e12f8",
+    color: "#a9a9a9",
   },
   twingo: {
     name: "Renault Twingo",
     m: 980,
     A: 2.0,
-    CL: 0.30,
+    CL: 0.3,
     CD: 0.32,
     v_max_kmh: 160,
     potencia_kw: 60,
     aceleracion_0_100: 10.8,
-    image: "https://cdn.motor1.com/images/mgl/2xG2e/s1/renault-twingo-electric.jpg",
-    color: "#ffeb3b"
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCmCd1Z9aX40Ok7GJtibC-aXLAF2UJdMNxfA&s",
+    color: "#ffeb3b",
   },
   vaca_aerodinamica: {
     name: "Vaca Aerodinámica",
@@ -200,8 +215,8 @@ const carsData = {
     v_max_kmh: 60,
     potencia_kw: 15,
     aceleracion_0_100: 25.0,
-    image: "https://upload.wikimedia.org/wikipedia/commons/1/15/Cow_female_black_white.jpg",
-    color: "#ffffff"
+    image: "https://i.redd.it/zzn76rz27r751.jpg",
+    color: "#ffffff",
   },
   minicooper: {
     name: "Mini Cooper S",
@@ -212,8 +227,9 @@ const carsData = {
     v_max_kmh: 235,
     potencia_kw: 141,
     aceleracion_0_100: 6.8,
-    image: "https://cdn.motor1.com/images/mgl/lZyWQ/s1/2022-mini-cooper-s.jpg",
-    color: "#0077b6"
+    image:
+      "https://www.autocar.co.uk/sites/autocar.co.uk/files/images/car-reviews/first-drives/legacy/1-mini-5-door-cooper-2018-uk-review-hero-front.jpg",
+    color: "#0077b6",
   },
   carro_inventado: {
     name: "Carro Inventado",
@@ -225,6 +241,6 @@ const carsData = {
     potencia_kw: 900,
     aceleracion_0_100: 1.8,
     color: "#a9a9a9",
-    image: "nksfdnsfdsfdk.png"
-  }
+    image: "https://i.imgur.com/oV2yHUp.gif",
+  },
 };
