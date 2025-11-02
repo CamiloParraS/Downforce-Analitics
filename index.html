@@ -3,6 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Simulador interactivo de downforce y suspensión para F1 y otros vehículos de competición. Calcula y visualiza el rendimiento de tu configuración." />
+    <meta name="keywords" content="F1, Fórmula 1, simulador, downforce, suspensión, aerodinámica, simulación, automovilismo, competición, coches de carreras, configuración de coche" />
+    <meta name="author" content="Juan Diego Lopez Arias" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/GameIconsF1Car.svg">
+    
     <title>Simulador de Downforce y Suspensión - F1 y otros</title>
 
     <!-- TailwindCSS -->
@@ -26,7 +33,7 @@
   <body class="bg-zinc-900 text-white min-h-screen p-4 md:p-8">
     <main class="max-w-6xl mx-auto">
       <!-- Header -->
-      <div class="bg-red-900 border-4 border-black neobrutalist-shadow-lg p-6 mb-8">
+      <header class="bg-red-900 border-4 border-black neobrutalist-shadow-lg p-6 mb-8">
         <h1 class="text-4xl md:text-5xl font-black text-white uppercase tracking-tight">
           Simulador de Downforce y Suspensión
         </h1>
@@ -34,10 +41,10 @@
           <a href="index.html" class="text-white font-bold uppercase underline">Individual</a>
           <a href="comparador.html" class="text-white font-bold uppercase underline">Comparador</a>
         </div>
-      </div>
+      </header>
 
       <!-- Main Content Grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <main class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         
         <!-- Left Column: Car Image & Controls -->
         <div class="space-y-6">
@@ -130,43 +137,59 @@
             </div>
           </div>
         </div>
-      </div>
+      </main>
 
       <!-- Charts Section -->
-      <div class="space-y-8 mb-8">
+      <section class="space-y-8 mb-8">
         <!-- Velocity vs Time Chart -->
-        <div class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
+        <article class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
           <h2 class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2">
             Velocidad vs Tiempo
           </h2>
           <canvas id="velocityChart"></canvas>
-        </div>
+        </article>
 
         <!-- Downforce vs Time Chart -->
-        <div class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
+        <article class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
           <h2 class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2">
             Downforce vs Tiempo
           </h2>
           <canvas id="downforceVsTimeChart"></canvas>
-        </div>
+        </article>
 
         <!-- Downforce vs Velocity Chart -->
-        <div class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
+        <article class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
           <h2 class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2">
             Downforce vs Velocidad (Curva Característica)
           </h2>
           <canvas id="downforceVsVelocityChart"></canvas>
-        </div>
+        </article>
 
         <!-- Suspension Chart -->
-        <div class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
+        <article class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
           <h2 class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2">
             Hundimiento de Suspensión vs Tiempo
           </h2>
           <canvas id="suspensionChart"></canvas>
-        </div>
-      </div>
+        </article>
+      </section>
+      
+      <footer class="bg-red-900 border-4 border-black neobrutalist-shadow-lg p-6 mb-8 text-center space-y-2">
+        <h2 class="text-white font-extrabold uppercase text-lg tracking-wide">
+          Juan Diego López Arias
+        </h2>
+  
+        <p class="text-gray-100 font-semibold uppercase text-xs max-w-2xl mx-auto leading-relaxed">
+          Esta página web no ofrece datos reales. Es un simulador académico sin fines comerciales,
+          diseñado exclusivamente para propósitos educativos y de aprendizaje.
+        </p>
+  
+        <p class="text-white font-bold uppercase text-sm mt-4 tracking-wider">
+          &copy; 2025 — Todos los derechos reservados.
+        </p>
+      </footer>
     </main>
+
 
     <!-- Scripts -->
     <script src="cars-data.js"></script>
