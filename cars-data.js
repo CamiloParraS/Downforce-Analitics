@@ -316,7 +316,7 @@ const carsData = {
     potencia_kw: 67,
     aceleracion_0_100: 11.7,
     image:
-      "https://th.bing.com/th/id/R.ff7f66a88d24cb225eb994f08c3be550?rik=gZ8cH1F4KL%2bhWg&pid=ImgRaw&r=0",
+      "https://www.elcarrocolombiano.com/wp-content/uploads/2024/07/20240731-DACIA-SANDERO-CARRO-MAS-VENDIDOS-EUROPA-PORTADA-jpg.webp",
     color: "#008751",
   },
   quadra_vtech_cyberpunk: {
@@ -355,7 +355,7 @@ const carsData = {
     potencia_kw: 522,
     aceleracion_0_100: 5.5,
     image:
-      "https://th.bing.com/th/id/R.6d340257de60c642e5bf1305d70687a1?rik=talXwZQVO%2fDlHw&pid=ImgRaw&r=0",
+      "https://www.altcinc.com/wp-content/uploads/2022/03/BATMAN_GRADE_AT_001_BATMOBILE_001_001_2022-03-02_15.49.32.jpg",
     color: "#1c1c1c",
   },
   batmobile_animated_series: {
