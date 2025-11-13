@@ -1,199 +1,321 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Simulador interactivo de downforce y suspensión para F1 y otros vehículos de competición. Calcula y visualiza el rendimiento de tu configuración." />
-    <meta name="keywords" content="F1, Fórmula 1, simulador, downforce, suspensión, aerodinámica, simulación, automovilismo, competición, coches de carreras, configuración de coche" />
-    <meta name="author" content="Juan Diego Lopez Arias" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Simulador interactivo de downforce y suspensión para F1 y otros vehículos de competición. Calcula y visualiza el rendimiento de tu configuración."
+        />
+        <meta
+            name="keywords"
+            content="F1, Fórmula 1, simulador, downforce, suspensión, aerodinámica, simulación, automovilismo, competición, coches de carreras, configuración de coche"
+        />
+        <meta name="author" content="Juan Diego Lopez Arias" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/GameIconsF1Car.svg">
-    
-    <title>Simulador de Downforce y Suspensión - F1 y otros</title>
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="GameIconsF1Car.svg" />
 
-    <!-- TailwindCSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Styles -->
-    <style>
-      .neobrutalist-shadow {
-        box-shadow: 6px 6px 0px rgba(0, 0, 0, 1);
-      }
-      .neobrutalist-shadow-lg {
-        box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
-      }
-      .neobrutalist-shadow-sm {
-        box-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
-      }
-    </style>
-  </head>
+        <title>Simulador de Downforce y Suspensión - F1 y otros</title>
 
-  <body class="bg-zinc-900 text-white min-h-screen p-4 md:p-8">
-    <main class="max-w-6xl mx-auto">
-      <!-- Header -->
-      <header class="bg-red-900 border-4 border-black neobrutalist-shadow-lg p-6 mb-8">
-        <h1 class="text-4xl md:text-5xl font-black text-white uppercase tracking-tight">
-          Simulador de Downforce y Suspensión
-        </h1>
-        <div class="mt-4 flex gap-4">
-          <a href="index.html" class="text-white font-bold uppercase underline">Individual</a>
-          <a href="comparador.html" class="text-white font-bold uppercase underline">Comparador</a>
-        </div>
-      </header>
+        <!-- TailwindCSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <!-- Chart.js -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- Styles -->
+        <style>
+            .neobrutalist-shadow {
+                box-shadow: 6px 6px 0px rgba(0, 0, 0, 1);
+            }
+            .neobrutalist-shadow-lg {
+                box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
+            }
+            .neobrutalist-shadow-sm {
+                box-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
+            }
+        </style>
+    </head>
 
-      <!-- Main Content Grid -->
-      <main class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        
-        <!-- Left Column: Car Image & Controls -->
-        <div class="space-y-6">
-          <!-- Car Image -->
-          <div class="bg-white border-4 border-black neobrutalist-shadow overflow-hidden">
-            <img
-              id="car-image"
-              src=""
-              class="w-full h-64 object-cover"
-              alt="Vehículo seleccionado"
-            />
-          </div>
-
-          <!-- Controls Panel -->
-          <div class="bg-red-900 border-4 border-black neobrutalist-shadow p-6">
-            <h2 class="text-2xl font-black text-white uppercase mb-4 border-b-4 border-black pb-2">
-              Configuración
-            </h2>
-            
-            <!-- Vehicle Selector -->
-            <div class="mb-6">
-              <label class="block text-white font-bold text-lg uppercase mb-2" for="car-selector">
-                Vehículo:
-              </label>
-              <select
-                id="car-selector"
-                class="w-full p-3 bg-white text-black font-bold uppercase neobrutalist-shadow-sm"
-              >
-              </select>
-            </div>
-
-            <!-- Speed Control -->
-            <div class="mb-6">
-              <label class="block text-white font-bold text-lg uppercase mb-2" for="velocidadFinalRange">
-                Velocidad Final:
-              </label>
-              <input
-                type="range"
-                id="velocidadFinalRange"
-                min="20"
-                max="420"
-                step="5"
-                value="320"
-                class="w-full h-3 bg-black neobrutalist-shadow-sm"
-              />
-              <p class="text-white font-bold text-xl mt-2 uppercase">
-                <span id="velocidadLabel">300</span> km/h
-              </p>
-            </div>
-
-            <!-- Generate Button -->
-            <button
-              id="generate-button"
-              class="w-full bg-red-600 hover:bg-red-700 text-white font-black text-xl uppercase py-4 neobrutalist-shadow"
+    <body class="bg-zinc-900 text-white min-h-screen p-4 md:p-8">
+        <main class="max-w-6xl mx-auto">
+            <!-- Header -->
+            <header
+                class="bg-red-900 border-4 border-black neobrutalist-shadow-lg p-6 mb-8"
             >
-              Generar Simulación
-            </button>
-          </div>
-        </div>
+                <h1
+                    class="text-4xl md:text-5xl font-black text-white uppercase tracking-tight"
+                >
+                    Simulador de Downforce y Suspensión
+                </h1>
+                <div class="mt-4 flex gap-4">
+                    <a
+                        href="index.html"
+                        class="text-white font-bold uppercase underline"
+                        >Individual</a
+                    >
+                    <a
+                        href="comparador.html"
+                        class="text-white font-bold uppercase underline"
+                        >Comparador</a
+                    >
+                </div>
+            </header>
 
-        <!-- Right Column: Vehicle Info -->
-        <div class="bg-red-900 border-4 border-black neobrutalist-shadow p-6">
-          <h2 class="text-2xl font-black text-white uppercase mb-4 border-b-4 border-black pb-2">
-            Información del Vehículo
-          </h2>
-          <div class="space-y-4">
-            <div class="bg-white border-3 border-black p-4 neobrutalist-shadow-sm">
-              <p class="text-black font-bold uppercase text-sm mb-1">Masa</p>
-              <p class="text-black font-black text-2xl" id="info-masa">-</p>
-            </div>
-            <div class="bg-white border-3 border-black p-4 neobrutalist-shadow-sm">
-              <p class="text-black font-bold uppercase text-sm mb-1">Potencia</p>
-              <p class="text-black font-black text-2xl" id="info-potencia">-</p>
-            </div>
-            <div class="bg-white border-3 border-black p-4 neobrutalist-shadow-sm">
-              <p class="text-black font-bold uppercase text-sm mb-1">Tiempo a Velocidad Final</p>
-              <p class="text-black font-black text-2xl" id="info-tiempo">-</p>
-            </div>
-            <div class="bg-white border-3 border-black p-4 neobrutalist-shadow-sm">
-              <p class="text-black font-bold uppercase text-sm mb-1">Velocidad Final</p>
-              <p class="text-black font-black text-2xl" id="info-velocidad">-</p>
-            </div>
-            <div class="bg-white border-3 border-black p-4 neobrutalist-shadow-sm">
-              <p class="text-black font-bold uppercase text-sm mb-1">Downforce Máximo</p>
-              <p class="text-black font-black text-2xl" id="info-downforce">-</p>
-            </div>
-            <div class="bg-white border-3 border-black p-4 neobrutalist-shadow-sm">
-              <p class="text-black font-bold uppercase text-sm mb-1">Hundimiento Suspensión</p>
-              <p class="text-black font-black text-2xl" id="info-hundimiento">-</p>
-            </div>
-          </div>
-        </div>
-      </main>
+            <!-- Main Content Grid -->
+            <main class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Left Column: Car Image & Controls -->
+                <div class="space-y-6">
+                    <!-- Car Image -->
+                    <div
+                        class="bg-white border-4 border-black neobrutalist-shadow overflow-hidden"
+                    >
+                        <img
+                            id="car-image"
+                            src=""
+                            class="w-full h-64 object-cover"
+                            alt="Vehículo seleccionado"
+                        />
+                    </div>
 
-      <!-- Charts Section -->
-      <section class="space-y-8 mb-8">
-        <!-- Velocity vs Time Chart -->
-        <article class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
-          <h2 class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2">
-            Velocidad vs Tiempo
-          </h2>
-          <canvas id="velocityChart"></canvas>
-        </article>
+                    <!-- Controls Panel -->
+                    <div
+                        class="bg-red-900 border-4 border-black neobrutalist-shadow p-6"
+                    >
+                        <h2
+                            class="text-2xl font-black text-white uppercase mb-4 border-b-4 border-black pb-2"
+                        >
+                            Configuración
+                        </h2>
 
-        <!-- Downforce vs Time Chart -->
-        <article class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
-          <h2 class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2">
-            Downforce vs Tiempo
-          </h2>
-          <canvas id="downforceVsTimeChart"></canvas>
-        </article>
+                        <!-- Vehicle Selector -->
+                        <div class="mb-6">
+                            <label
+                                class="block text-white font-bold text-lg uppercase mb-2"
+                                for="car-selector"
+                            >
+                                Vehículo:
+                            </label>
+                            <select
+                                id="car-selector"
+                                class="w-full p-3 bg-white text-black font-bold uppercase neobrutalist-shadow-sm"
+                            ></select>
+                        </div>
 
-        <!-- Downforce vs Velocity Chart -->
-        <article class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
-          <h2 class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2">
-            Downforce vs Velocidad (Curva Característica)
-          </h2>
-          <canvas id="downforceVsVelocityChart"></canvas>
-        </article>
+                        <!-- Speed Control -->
+                        <div class="mb-6">
+                            <label
+                                class="block text-white font-bold text-lg uppercase mb-2"
+                                for="velocidadFinalRange"
+                            >
+                                Velocidad Final:
+                            </label>
+                            <input
+                                type="range"
+                                id="velocidadFinalRange"
+                                min="20"
+                                max="420"
+                                step="5"
+                                value="320"
+                                class="w-full h-3 bg-black neobrutalist-shadow-sm"
+                            />
+                            <p
+                                class="text-white font-bold text-xl mt-2 uppercase"
+                            >
+                                <span id="velocidadLabel">300</span> km/h
+                            </p>
+                        </div>
 
-        <!-- Suspension Chart -->
-        <article class="bg-white border-4 border-black neobrutalist-shadow-lg p-6">
-          <h2 class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2">
-            Hundimiento de Suspensión vs Tiempo
-          </h2>
-          <canvas id="suspensionChart"></canvas>
-        </article>
-      </section>
-      
-      <footer class="bg-red-900 border-4 border-black neobrutalist-shadow-lg p-6 mb-8 text-center space-y-2">
-        <!-- <h2 class="text-white font-extrabold uppercase text-lg tracking-wide">
+                        <!-- Generate Button -->
+                        <button
+                            id="generate-button"
+                            class="w-full bg-red-600 hover:bg-red-700 text-white font-black text-xl uppercase py-4 neobrutalist-shadow"
+                        >
+                            Generar Simulación
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column: Vehicle Info -->
+                <div
+                    class="bg-red-900 border-4 border-black neobrutalist-shadow p-6"
+                >
+                    <h2
+                        class="text-2xl font-black text-white uppercase mb-4 border-b-4 border-black pb-2"
+                    >
+                        Información del Vehículo
+                    </h2>
+                    <div class="space-y-4">
+                        <div
+                            class="bg-white border-3 border-black p-4 neobrutalist-shadow-sm"
+                        >
+                            <p
+                                class="text-black font-bold uppercase text-sm mb-1"
+                            >
+                                Masa
+                            </p>
+                            <p
+                                class="text-black font-black text-2xl"
+                                id="info-masa"
+                            >
+                                -
+                            </p>
+                        </div>
+                        <div
+                            class="bg-white border-3 border-black p-4 neobrutalist-shadow-sm"
+                        >
+                            <p
+                                class="text-black font-bold uppercase text-sm mb-1"
+                            >
+                                Potencia
+                            </p>
+                            <p
+                                class="text-black font-black text-2xl"
+                                id="info-potencia"
+                            >
+                                -
+                            </p>
+                        </div>
+                        <div
+                            class="bg-white border-3 border-black p-4 neobrutalist-shadow-sm"
+                        >
+                            <p
+                                class="text-black font-bold uppercase text-sm mb-1"
+                            >
+                                Tiempo a Velocidad Final
+                            </p>
+                            <p
+                                class="text-black font-black text-2xl"
+                                id="info-tiempo"
+                            >
+                                -
+                            </p>
+                        </div>
+                        <div
+                            class="bg-white border-3 border-black p-4 neobrutalist-shadow-sm"
+                        >
+                            <p
+                                class="text-black font-bold uppercase text-sm mb-1"
+                            >
+                                Velocidad Final
+                            </p>
+                            <p
+                                class="text-black font-black text-2xl"
+                                id="info-velocidad"
+                            >
+                                -
+                            </p>
+                        </div>
+                        <div
+                            class="bg-white border-3 border-black p-4 neobrutalist-shadow-sm"
+                        >
+                            <p
+                                class="text-black font-bold uppercase text-sm mb-1"
+                            >
+                                Downforce Máximo
+                            </p>
+                            <p
+                                class="text-black font-black text-2xl"
+                                id="info-downforce"
+                            >
+                                -
+                            </p>
+                        </div>
+                        <div
+                            class="bg-white border-3 border-black p-4 neobrutalist-shadow-sm"
+                        >
+                            <p
+                                class="text-black font-bold uppercase text-sm mb-1"
+                            >
+                                Hundimiento Suspensión
+                            </p>
+                            <p
+                                class="text-black font-black text-2xl"
+                                id="info-hundimiento"
+                            >
+                                -
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Charts Section -->
+            <section class="space-y-8 mb-8">
+                <!-- Velocity vs Time Chart -->
+                <article
+                    class="bg-white border-4 border-black neobrutalist-shadow-lg p-6"
+                >
+                    <h2
+                        class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2"
+                    >
+                        Velocidad vs Tiempo
+                    </h2>
+                    <canvas id="velocityChart"></canvas>
+                </article>
+
+                <!-- Downforce vs Time Chart -->
+                <article
+                    class="bg-white border-4 border-black neobrutalist-shadow-lg p-6"
+                >
+                    <h2
+                        class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2"
+                    >
+                        Downforce vs Tiempo
+                    </h2>
+                    <canvas id="downforceVsTimeChart"></canvas>
+                </article>
+
+                <!-- Downforce vs Velocity Chart -->
+                <article
+                    class="bg-white border-4 border-black neobrutalist-shadow-lg p-6"
+                >
+                    <h2
+                        class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2"
+                    >
+                        Downforce vs Velocidad (Curva Característica)
+                    </h2>
+                    <canvas id="downforceVsVelocityChart"></canvas>
+                </article>
+
+                <!-- Suspension Chart -->
+                <article
+                    class="bg-white border-4 border-black neobrutalist-shadow-lg p-6"
+                >
+                    <h2
+                        class="text-2xl font-black text-black uppercase mb-4 border-b-4 border-black pb-2"
+                    >
+                        Hundimiento de Suspensión vs Tiempo
+                    </h2>
+                    <canvas id="suspensionChart"></canvas>
+                </article>
+            </section>
+
+            <footer
+                class="bg-red-900 border-4 border-black neobrutalist-shadow-lg p-6 mb-8 text-center space-y-2"
+            >
+                <!-- <h2 class="text-white font-extrabold uppercase text-lg tracking-wide">
           Juan Diego López Arias
         </h2> -->
-  
-        <p class="text-gray-100 font-semibold uppercase text-xs max-w-2xl mx-auto leading-relaxed">
-          Esta página web no ofrece datos reales. Es un simulador académico sin fines comerciales,
-          diseñado exclusivamente para propósitos educativos y de aprendizaje.
-        </p>
-  
-        <p class="text-white font-bold uppercase text-sm mt-4 tracking-wider">
-          &copy; 2025 — Todos los derechos reservados.
-        </p>
-      </footer>
-    </main>
 
+                <p
+                    class="text-gray-100 font-semibold uppercase text-xs max-w-2xl mx-auto leading-relaxed"
+                >
+                    Esta página web no ofrece datos reales. Es un simulador
+                    académico sin fines comerciales, diseñado exclusivamente
+                    para propósitos educativos y de aprendizaje.
+                </p>
 
-    <!-- Scripts -->
-    <script src="cars-data.js"></script>
-    <script src="physics.js"></script>
-    <script src="app-individual.js"></script>
-  </body>
+                <p
+                    class="text-white font-bold uppercase text-sm mt-4 tracking-wider"
+                >
+                    &copy; 2025 — Todos los derechos reservados.
+                </p>
+            </footer>
+        </main>
+
+        <!-- Scripts -->
+        <script src="cars-data.js"></script>
+        <script src="physics.js"></script>
+        <script src="app-individual.js"></script>
+    </body>
 </html>
